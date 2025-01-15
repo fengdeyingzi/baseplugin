@@ -25,32 +25,16 @@ class Blob {
     throw new UnsupportedError("Not supported");
   }
 
-  int get size native;
+  int size = 0;
 
-  String get type native;
+  String type = "";
 
   Blob slice([int? start, int? end, String? contentType]) native;
 
-  factory Blob(List blobParts, [String? type, String? endings]) {
-    // TODO: validate that blobParts is a JS Array and convert if not.
-    // TODO: any coercions on the elements of blobParts, e.g. coerce a typed
-    // array to ArrayBuffer if it is a total view.
-    if (type == null && endings == null) {
-      return _create_1(blobParts);
-    }
-    var bag = _create_bag();
-    if (type != null) _bag_set(bag, 'type', type);
-    if (endings != null) _bag_set(bag, 'endings', endings);
-    return _create_2(blobParts, bag);
+  Blob(List blobParts, [String? type, String? endings]) {
+    
   }
-
-  static _create_1(parts) => JS('Blob', 'new self.Blob(#)', parts);
-  static _create_2(parts, bag) => JS('Blob', 'new self.Blob(#, #)', parts, bag);
-
-  static _create_bag() => JS('var', '{}');
-  static _bag_set(bag, key, value) {
-    JS('void', '#[#] = #', bag, key, value);
-  }
+  
 }
 
 
