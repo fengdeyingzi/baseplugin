@@ -18,7 +18,9 @@ export 'util/FileUtil.dart';
 export 'util/XDialog.dart';
 export 'util/XHttpUtils.dart';
 export 'util/XUtil.dart';
+export 'util/user_agent.dart';
 import 'baseplugin_platform_interface.dart';
+
 
 
 class Baseplugin {
