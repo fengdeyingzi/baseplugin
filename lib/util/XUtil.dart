@@ -2,24 +2,43 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:convert/convert.dart';
+import 'html.dart' if (dart.library.html) 'dart:html';
 // base64库
 import 'dart:convert' as convert;
-//import 'dart:js' as js;
+// import 'dart:js' as js;
 
 // 文件相关
-import 'dart:io';
-import 'package:crypto/crypto.dart';
+import 'dart:io' if (dart.library.html) 'io.dart';
 
 class XUtil {
   /** 返回当前时间戳 */
   static int currentTimeMillis() {
     return new DateTime.now().millisecondsSinceEpoch;
   }
+
+     //禁用浏览器右键
+  static void disableRightClick() {
+    if (kIsWeb) {
+      // 添加右键菜单禁用事件
+    document.onContextMenu.listen((event) {
+      event.preventDefault();
+    });
+    }
+  }
+
+
+  //移除禁用浏览器右键
+  static void enableRightClick() {
+    if (kIsWeb) {
+
+      // 移除事件监听器
+    document.onContextMenu.listen((event) {}).cancel();
+    }
+  }
+
 
   /**
    * 随机数
@@ -213,19 +232,19 @@ class XUtil {
   }
 
   // md5 加密
-  static String MD5(String data) {
-    var content = new Utf8Encoder().convert(data);
-    var digest = md5.convert(content);
-    // 这里其实就是 digest.toString()
-    return hex.encode(digest.bytes);
-  }
+  // static String MD5(String data) {
+  //   var content = new Utf8Encoder().convert(data);
+  //   var digest = md5.convert(content);
+  //   // 这里其实就是 digest.toString()
+  //   return hex.encode(digest.bytes);
+  // }
 
-  static String MD516(String data) {
-    var content = new Utf8Encoder().convert(data);
-    var digest = md5.convert(content);
-    // 这里其实就是 digest.toString()
-    return hex.encode(digest.bytes).substring(8,24);
-  }
+  // static String MD516(String data) {
+  //   var content = new Utf8Encoder().convert(data);
+  //   var digest = md5.convert(content);
+  //   // 这里其实就是 digest.toString()
+  //   return hex.encode(digest.bytes).substring(8,24);
+  // }
 
   //计算文字高度
   ///value: 文本内容；fontSize : 文字的大小；fontWeight：文字权重；maxWidth：文本框的最大宽度；maxLines：文本支持最大多少行

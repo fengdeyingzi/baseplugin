@@ -20,6 +20,7 @@ export 'util/XHttpUtils.dart';
 export 'util/XUtil.dart';
 export 'util/user_agent.dart';
 import 'baseplugin_platform_interface.dart';
+export "util/XWebSocket.dart";
 
 
 

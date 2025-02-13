@@ -18,6 +18,15 @@ class window{
   static Navigator navigator = Navigator();
 }
 
+class MouseEvent{
+  void preventDefault() {}
+
+}
+class document{
+  static Stream<MouseEvent> get onContextMenu => throw UnimplementedError();
+
+}
+
 
 class Blob {
   // To suppress missing implicit constructor warnings.
@@ -25,16 +34,38 @@ class Blob {
     throw new UnsupportedError("Not supported");
   }
 
-  int size = 0;
+  int get size{
+    return 0;
+  }
 
-  String type = "";
+  String get type {
+    return '';
+  }
 
-  Blob slice([int? start, int? end, String? contentType]) native;
+  Blob slice([int? start, int? end, String? contentType]){
+    throw UnimplementedError();
+  }
 
-  Blob(List blobParts, [String? type, String? endings]) {
+  factory Blob(List blobParts, [String? type, String? endings]) {
+    // TODO: validate that blobParts is a JS Array and convert if not.
+    // TODO: any coercions on the elements of blobParts, e.g. coerce a typed
+    // array to ArrayBuffer if it is a total view.
+    if (type == null && endings == null) {
+      return _create_1(blobParts);
+    }
+    var bag = _create_bag();
+    if (type != null) _bag_set(bag, 'type', type);
+    if (endings != null) _bag_set(bag, 'endings', endings);
+    return _create_2(blobParts, bag);
+  }
+
+  static _create_1(parts) => throw UnimplementedError();
+  static _create_2(parts, bag) => throw UnimplementedError();
+
+  static _create_bag() => throw UnimplementedError();
+  static _bag_set(bag, key, value) {
     
   }
-  
 }
 
 
