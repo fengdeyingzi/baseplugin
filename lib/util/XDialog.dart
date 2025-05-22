@@ -92,7 +92,7 @@ class XDialog {
                       
                       constraints: BoxConstraints(
 //                    minWidth: double.infinity, //宽度尽可能大
-                          maxHeight: 320 //最小高度为50像素
+                          maxHeight: 520 //最小高度为50像素
                       ),
                     ),
                   ],

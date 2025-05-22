@@ -153,11 +153,11 @@ class XHttpUtils {
 //创建请求，返回字符串
   static Future<String?> requestBody(String url,
       {heads,
-      required Map<String, dynamic> data,
+      Map<String, dynamic>? data,
       String? method,
       String coding = "UTF-8",String contentType = formUrlEncodedContentType}) async {
 Map<String, String> map_header = {};
-    data.removeWhere((key, value) => value == null);
+    
     int pos = 80;
     if (url.startsWith("https:")) {
       pos = 443;
@@ -166,18 +166,21 @@ Map<String, String> map_header = {};
     StringBuffer buffer = new StringBuffer();
     buffer.write("--> ${method} ${url} ");
 
-    String postData = json.encode(data);
+    
     map_header["content-type"] = contentType;
     if (heads != null) {
       map_header.addAll(heads);
     }
-    if (contentType == formUrlEncodedContentType) {
-      postData = mapToPostData(data);
-      // print("键值对 ${postData}");
-    }
-    buffer.writeln("${postData}");
+    
     print(map_header.toString());
     if (method == POST) {
+      data!.removeWhere((key, value) => value == null);
+      String postData = json.encode(data);
+      if (contentType == formUrlEncodedContentType) {
+      postData = mapToPostData(data);
+      // print("键值对 ${postData}");
+      }
+      buffer.writeln("${postData}");
       Uri uri = Uri.parse(url);
       try {
         http.Response response = await http
@@ -211,9 +214,9 @@ Map<String, String> map_header = {};
 
       // #endif
     } else if (method == GET) {
-      if (postData.isNotEmpty) {
-        url = url + "?" + postData;
-      }
+      // if (postData.isNotEmpty) {
+      //   url = url + "?" + postData;
+      // }
       Uri uri = Uri.parse(url);
       print("请求：" + url);
       try {

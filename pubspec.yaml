@@ -20,6 +20,7 @@ dev_dependencies:
   sprintf: ^6.0.0
   cached_network_image: ^3.2.0
   convert: ^3.1.1
+  web_socket_channel: ^2.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
