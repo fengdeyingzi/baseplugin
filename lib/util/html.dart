@@ -29,7 +29,7 @@ class Blob {
 
   String type = "";
 
-  Blob slice([int? start, int? end, String? contentType]) native;
+  Blob slice([int? start, int? end, String? contentType]) { throw new UnsupportedError("Not supported"); }
 
   Blob(List blobParts, [String? type, String? endings]) {
     
